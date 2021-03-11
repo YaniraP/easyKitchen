@@ -1,0 +1,12 @@
+.container-404 {
+  background-color: rgb(255, 244, 187);
+  height: 100vh;
+}
+
+.pic {
+  height: 700px;
+}
+
+.text {
+  color: pink;
+}
