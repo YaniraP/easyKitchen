@@ -2,7 +2,8 @@ const express = require('express');
 const router = require('./router');
 const cors = require('cors')
 const morgan = require('morgan');
-const db = require('./models')
+import { createModels } from 'models';
+const db = createModels();
 
 const app = express();
 const PORT = 3001;
