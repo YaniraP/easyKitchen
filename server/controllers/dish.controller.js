@@ -1,5 +1,5 @@
-// const db = require('../models/index');
-const { Dish } = require('../models');
+const db = require('../models/index');
+
 
 
 //get all dishes 

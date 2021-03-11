@@ -1,5 +1,6 @@
-// const db = require('../models/index'); => db.Menu
 const { Menu, Dish } = require('../models');
+
+
 
 //get all menus 
 exports.getAll = async (req, res) => {
