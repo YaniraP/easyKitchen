@@ -1,6 +1,6 @@
 .container-menuSaved{
-background-image: url("/home/yanira/CodeworksSenior/soloProject/happyKitchen/client/src/img/undraw_confirmed_81ex.svg");
-height: 70vh; 
+background-image: url('../../img/undraw_confirmed_81ex.svg');
+height: 70vh;
 
 padding-top: 4%;
 background-repeat:no-repeat;
@@ -18,4 +18,4 @@ margin: 80px;
    top: 380px;
    left: 900px;
 
- } 
+ }

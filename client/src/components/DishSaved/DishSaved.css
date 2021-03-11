@@ -1,6 +1,6 @@
 .container-dishSaved{
-background-image: url("/home/yanira/CodeworksSenior/soloProject/happyKitchen/client/src/img/dish.png");
-height: 70vh; 
+background-image: url('../../img/dish.png');
+height: 70vh;
 
 padding-top: 4%;
 background-repeat:no-repeat;
@@ -18,4 +18,4 @@ h2 {
    top: 380px;
    left: 900px;
 
- } 
+ }
