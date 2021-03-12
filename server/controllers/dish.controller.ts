@@ -1,6 +1,4 @@
-const db = require('../models/index');
-
-
+const { Dish } = require('../models');
 
 //get all dishes 
 exports.getAll = async (req, res) => {
@@ -41,6 +39,8 @@ exports.deleteDish = async (req, res) => {
       });
     });
 }
+
+
 
 
 //TODO: modify a dish (if needed later)

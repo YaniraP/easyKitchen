@@ -1,13 +1,12 @@
-const { Menu, Dish } = require('../models');
-
-
+const { Menu } = require('../models');
 
 //get all menus 
 exports.getAll = async (req, res) => {
   try {
     const menus = await Menu.findAll({
       include: [{ model: Dish }]
-    });
+    }
+    );
     res.status(200)
     res.send(menus)
   } catch (e) {
@@ -37,7 +36,8 @@ exports.createMenu = async (req, res) => {
   console.log('req.body -> ', req.body.DishId);
   try {
     const newMenu = await Menu.create(req.body);
-    newMenu.addDish(req.body.DishId);
+    //TODO uncomment line below when association is 
+    //newMenu.addDish(req.body.DishId);
     res.status(201);
     res.send(newMenu)
   } catch (e) {
@@ -52,7 +52,8 @@ exports.deleteMenu = async (req, res) => {
   Menu.destroy({
     where: { title: title }
   }).then(() => {
-    res.status(204).send(id);
+    //TODO uncomment
+    //res.status(204).send(id);
   })
     .catch(err => {
       res.status(500).send({
