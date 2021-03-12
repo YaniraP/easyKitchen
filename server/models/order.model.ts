@@ -10,7 +10,7 @@ export interface OrderAttributes {
 }
 
 // Some attributes are optional in `User.build` and `User.create` calls
-interface OrderCreationAttributes extends Optional<OrderAttributes, 'id'> {}
+export interface OrderCreationAttributes extends Optional<OrderAttributes, 'id'> {}
 
 module.exports = (sequelize, DataTypes) => {
   const Order: ModelDefined<
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   },
     {
-      tableName: 'Order',
+      tableName: 'Orders',
     }
   );
 

@@ -1,17 +1,22 @@
-import { DataTypes, ModelDefined, Optional, Sequelize } from 'sequelize';
+import {  Model, Optional } from 'sequelize';
 
 // Interface
 export interface MenuAttributes {
   id?: number;
   title: string;
-  bear: symbol;
+  addDish: (() => any);
 }
 
+
+
 // Some attributes are optional in `User.build` and `User.create` calls
-interface MenuCreationAttributes extends Optional<MenuAttributes, 'id'> {}
+export interface MenuCreationAttributes extends Optional<MenuAttributes, 'id' | 'addDish'> {}
+
+// interface MenuInstance extends Model<MenuAttributes>,
+// MenuAttributes{}
 
 module.exports = (sequelize, DataTypes) => {
-  const Menu: ModelDefined<
+  const Menu: Model<
     MenuAttributes,
     MenuCreationAttributes
   > = sequelize.define(
@@ -23,11 +28,9 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Menu',
+      tableName: 'Menus',
     }
   );
-
-  //TODO: Add associations
 
   return Menu;
 };

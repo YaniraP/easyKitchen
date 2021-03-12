@@ -1,4 +1,7 @@
-import {Sequelize, DataTypes} from 'sequelize';
+import {Sequelize, DataTypes, ModelDefined} from 'sequelize';
+import {DishAttributes, DishCreationAttributes} from './dish.model';
+import {MenuAttributes, MenuCreationAttributes} from './menu.model';
+import {OrderAttributes, OrderCreationAttributes} from './order.model';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -7,6 +10,9 @@ const basename = path.basename(__filename)
 interface db {
   sequelize?: any;
   Sequelize?: any;
+  Dish?: ModelDefined<DishAttributes, DishCreationAttributes>;
+  Menu?: ModelDefined<MenuAttributes, MenuCreationAttributes>;
+  Order?: ModelDefined<OrderAttributes, OrderCreationAttributes>;
 }
 const db: db = {};
 
@@ -58,7 +64,15 @@ sequelize
     console.error('Unable to connect to the database:', error);
   });
 
-  module.exports = db;
+  // Dish Associations
+db.Dish.belongsToMany(db.Menu, { through: 'DishesPerMenu' });
+db.Dish.belongsToMany(db.Order, { through: 'DishesPerOrder' });
+
+// Associations
+db.Order.belongsToMany(db.Dish, { through: 'DishesPerOrder' });
+
+
+  export default db;
 
 
 

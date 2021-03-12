@@ -15,7 +15,7 @@ export interface DishAttributes {
 }
 
 // Some attributes are optional in `User.build` and `User.create` calls
-interface DishCreationAttributes extends Optional<DishAttributes, 'id'> {}
+export interface DishCreationAttributes extends Optional<DishAttributes, 'id'> {}
 
 module.exports = (sequelize, DataTypes) => {
   const Dish: ModelDefined<
@@ -40,16 +40,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: 'Dish'
+      tableName: 'Dishes'
     }
   );
-
-
-  //TODO: Add associations
-// Dish.associate = model => {
-// Dish.belongsToMany(model.Menu, {through: 'DishesPerMenu'});
-// Dish.belongsToMany(model.Order, {through: 'DishesPerOrder'})
-
+  
 return Dish
 };
 

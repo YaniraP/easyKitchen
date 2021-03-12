@@ -1,9 +1,9 @@
-const { Dish } = require('../models');
+import db from '../models/index'
 
 //get all dishes 
 exports.getAll = async (req, res) => {
   try {
-    const dishes = await Dish.findAll();
+    const dishes = await db.Dish.findAll();
     res.status(200)
     res.send(dishes)
   } catch (e) {
@@ -15,7 +15,7 @@ exports.getAll = async (req, res) => {
 // create a dish 
 exports.addDish = async (req, res) => {
   try {
-    const newDish = await Dish.create(req.body);
+    const newDish = await db.Dish.create(req.body);
     res.status(201);
     res.send(newDish)
   } catch (e) {
@@ -26,16 +26,16 @@ exports.addDish = async (req, res) => {
 
 // delete a dish 
 exports.deleteDish = async (req, res) => {
-  const title = req.body.title;
+  const id = req.params.id;
 
-  Dish.destroy({
-    where: { title: title }
+  db.Dish.destroy({
+    where: { id: id }
   }).then(() => {
     res.status(204).end();
   })
     .catch(err => {
       res.status(500).send({
-        message: "Error deletingOrder with name=" + title
+        message: "Error deletingOrder with id=" + id
       });
     });
 }

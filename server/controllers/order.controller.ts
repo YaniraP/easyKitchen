@@ -1,9 +1,8 @@
-const { Order } = require('../models');
-
+import db from "../models/index";
 //get all orders 
 exports.getAll = async (req, res) => {
   try {
-    const orders = await Order.findAll(
+    const orders = await db.Order.findAll(
     //   {
     //   include: [{ model: Dish }]
     // }
@@ -17,11 +16,10 @@ exports.getAll = async (req, res) => {
   }
 };
 
-// create an order
+// // create an order
 // exports.createOrder = async (req, res) => {
 //   try {
 //     const newOrder = await db.Order.create(req.body);
-//     //TODO uncomment
 //     //await newOrder.setDishes(req.body.DishId); //update join table data
 //     const dishes = await newOrder.getDishes();
 //     console.log('dishes -> ', dishes);
@@ -40,7 +38,7 @@ exports.getAll = async (req, res) => {
 exports.deleteOrder = async (req, res) => {
   const id = parseInt(req.body.id);
 
-  Order.destroy({
+  db.Order.destroy({
     where: { id: id }
   }).then(() => {
     res.status(204).end();

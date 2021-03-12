@@ -15,7 +15,7 @@ router.delete('/dish', dishCtrl.deleteDish)
 //MENU
 router.get('/menu', menuCtrl.getAll)
 router.post('/menu', menuCtrl.createMenu)
-router.delete('/menu', menuCtrl.deleteMenu)
+router.delete('/menu/:id', menuCtrl.deleteMenu)
 router.get('/menu/:id', menuCtrl.getOneMenu)
 
 

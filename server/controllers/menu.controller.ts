@@ -1,16 +1,15 @@
-const { Menu } = require('../models');
+import db from '../models/index';
 
-//get all menus 
+//get all menus
 exports.getAll = async (req, res) => {
   try {
-    const menus = await Menu.findAll({
-      include: [{ model: Dish }]
-    }
-    );
-    res.status(200)
-    res.send(menus)
+    const menus = await db.Menu.findAll({
+      include: [{ model: db.Dish }],
+    });
+    res.status(200);
+    res.send(menus);
   } catch (e) {
-    console.log(e)  //eslint-disable-line no-console
+    console.log(e); //eslint-disable-line no-console
     res.status(500);
   }
 };
@@ -18,50 +17,50 @@ exports.getAll = async (req, res) => {
 //get menu by Id
 exports.getOneMenu = async (req, res) => {
   try {
-    const { id } = req.params
-    const menu = await Menu.findOne({
-      where:
-        { id: id }
+    const { id } = req.params;
+    const menu = await db.Menu.findOne({
+      where: { id: id },
     });
-    res.status(200)
-    res.send(menu)
+    res.status(200);
+    res.send(menu);
   } catch (e) {
-    console.log(e)  //eslint-disable-line no-console
+    console.log(e); //eslint-disable-line no-console
     res.status(500);
   }
-}
+};
 
-// create a menu 
+// create a menu
 exports.createMenu = async (req, res) => {
   console.log('req.body -> ', req.body.DishId);
   try {
-    const newMenu = await Menu.create(req.body);
-    //TODO uncomment line below when association is 
-    //newMenu.addDish(req.body.DishId);
+    const newMenu = await db.Menu.create(req.body);
+
+    newMenu.addDish(req.body.DishId);
+    console.log(newMenu);
     res.status(201);
-    res.send(newMenu)
+    res.send(newMenu);
+
   } catch (e) {
-    console.log(e);  //eslint-disable-line no-console
+    console.log(e); //eslint-disable-line no-console
     res.status(500).send(e);
   }
-}
+};
 
-// delete a menu 
+// delete a menu
 exports.deleteMenu = async (req, res) => {
   const title = req.body.title;
-  Menu.destroy({
-    where: { title: title }
-  }).then(() => {
-    //TODO uncomment
-    //res.status(204).send(id);
+  const { id } = req.params;
+  db.Menu.destroy({
+    where: { title: title },
   })
-    .catch(err => {
+    .then(() => {
+      res.status(204).send(id);
+    })
+    .catch((err) => {
       res.status(500).send({
-        message: "Error deletingOrder with title" + title
+        message: 'Error deletingOrder with title' + title,
       });
     });
-}
-
+};
 
 //TODO: modify a menu (if needed later)
-
