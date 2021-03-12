@@ -1,55 +1,24 @@
-// OLD CODE =============================================
+import { ModelDefined, Optional } from 'sequelize';
 
-// module.exports = (sequelize, DataTypes) => {
-
-//   const  Order = sequelize.define('Order', {
-//     clientName: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     clientAddress: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     clientPhone: {
-//       type: DataTypes.INTEGER(15)
-//     },
-//     comments: {
-//       type: DataTypes.STRING(500)
-//     }
-//   });
-
-//   Order.associate = model => {
-//     Order.belongsToMany(model.Dish, {through: 'DishesPerOrder'});
-//   };
-
-//   return Order;
-// }
-
-// START REFACTOR ======================================
-
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from '../typings/SequelizeAttributes';
-
+// Interface
 export interface OrderAttributes {
   id?: number;
   clientName: string;
   clientAddress: string;
   clientPhone: number;
   comments: string;
-  createdAt?: Date;
-  updatedAt?: Date;
 }
 
-export interface OrderInstance
-  extends Sequelize.Instance<OrderAttributes>,
-    OrderAttributes {}
+// Some attributes are optional in `User.build` and `User.create` calls
+interface OrderCreationAttributes extends Optional<OrderAttributes, 'id'> {}
 
-export const OrderFactory = (
-  sequelize: Sequelize.Sequelize,
-  DataTypes: Sequelize.DataTypes
-): Sequelize.Model<OrderInstance, OrderAttributes> => {
-  const attributes: SequelizeAttributes<OrderAttributes> = {
+module.exports = (sequelize, DataTypes) => {
+  const Order: ModelDefined<
+    OrderAttributes,
+    OrderCreationAttributes
+  > = sequelize.define(
+    'Order',
+    {
     clientName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -59,17 +28,18 @@ export const OrderFactory = (
       allowNull: false,
     },
     clientPhone: {
-      type: DataTypes.INTEGER(15),
+      type: DataTypes.INTEGER(15)
     },
     comments: {
-      type: DataTypes.STRING(500),
-    },
-  };
-
-  const Order = sequelize.define<OrderInstance, OrderAttributes>(
-    'Order',
-    attributes
+      type: DataTypes.STRING(500)
+    }
+  },
+    {
+      tableName: 'Order',
+    }
   );
+
+  //TODO: Add associations
 
   return Order;
 };

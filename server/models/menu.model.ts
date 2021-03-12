@@ -1,49 +1,33 @@
-// OLD CODE =======================================
+import { DataTypes, ModelDefined, Optional, Sequelize } from 'sequelize';
 
-//  (sequelize, DataTypes) => {
-//   const Menu = sequelize.define('Menu', {
-//     title: {
-//       type: DataTypes.STRING,
-//       allowNull: false
-//     }
-//   });
-
-//   Menu.associate = model => {
-//     Menu.belongsToMany(model.Dish, { through: 'DishesPerMenu' })
-//   }
-//   return Menu;
-// }
-
-// START REFACTOR ==================================
-
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from '../typings/SequelizeAttributes';
-
+// Interface
 export interface MenuAttributes {
   id?: number;
   title: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  bear: symbol;
 }
 
-export interface MenuInstance
-  extends Sequelize.Instance<MenuAttributes>,
-    MenuAttributes {}
+// Some attributes are optional in `User.build` and `User.create` calls
+interface MenuCreationAttributes extends Optional<MenuAttributes, 'id'> {}
 
-export const MenuFactory = (
-  sequelize: Sequelize.Sequelize,
-  DataTypes: Sequelize.DataTypes
-): Sequelize.Model<MenuInstance, MenuAttributes> => {
-  const attributes: SequelizeAttributes<MenuAttributes> = {
-    title: {
-      type: DataTypes.STRING,
-    },
-  };
-
-  const Menu = sequelize.define<MenuInstance, MenuAttributes>(
+module.exports = (sequelize, DataTypes) => {
+  const Menu: ModelDefined<
+    MenuAttributes,
+    MenuCreationAttributes
+  > = sequelize.define(
     'Menu',
-    attributes
+    {
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    },
+    {
+      tableName: 'Menu',
+    }
   );
+
+  //TODO: Add associations
 
   return Menu;
 };
