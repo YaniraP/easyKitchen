@@ -8,7 +8,6 @@ import OrderList from './components/OrderList/orderList';
 import DishForm from './components/DishForm/dishForm';
 import MenuForm from './components/MenuForm/menuForm';
 import OrderForm from './components/OrderForm/orderForm';
-import MenuItemById from './components/MenuItemById/menuItemById';
 import Home from './components/Home/Home';
 import { CssBaseline, Grid } from '@material-ui/core';
 import TopNav from './components/AppTools/TopNav/TopNav';
@@ -45,10 +44,15 @@ function App () {
   }, []);
 
   const createNewMenu = (body) => {
+    console.log('passing this to createmenu:')
+    console.log(body)
+    const dishesById = body.DishId.map((dishId) => dishes.find(dish => dish.id === dishId));
     ApiService.createMenu(body)
-      .then((menu) => setMenus(prevMenus => [...prevMenus, menu]))
+      .then((menu) => {
+        Object.assign(menu, {Dishes: dishesById})
+        setMenus(prevMenus => [...prevMenus, menu])
+      })
   };
-
 
   const deleteOneMenu = (id) => {
     ApiService.deleteMenu(id)
@@ -122,11 +126,6 @@ function App () {
                   dishes={dishes}
                   chosenMenu={chosenMenu}
                   setChosenMenu={setChosenMenu}
-                />
-              </Route>
-              <Route exact path="/menu/:id">
-                <MenuItemById
-                  menus={menus}
                 />
               </Route>
               <Route exact path="/get_started" component={GetStarted} />
