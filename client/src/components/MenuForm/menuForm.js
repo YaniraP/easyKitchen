@@ -1,4 +1,5 @@
 import './menuForm.css';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
 import { withRouter } from 'react-router-dom';
@@ -9,18 +10,25 @@ import { useHistory } from 'react-router';
 function MenuForm ({ dishes, createNewMenu, selectedDishes, setSelectedDishes }) {
 
   const { register, handleSubmit, reset } = useForm();
+  let [noSelectionError, setNoSelectionError] = useState(false);
   let { id } = useParams();
   const history = useHistory();
 
 
+
   const onSubmit = data => {
-    const parsedData = {
-      title: data.title,
-      DishId: selectedDishes.map(id => parseInt(id))
+    if (selectedDishes.length === 0){
+      setNoSelectionError(true);
+    } else {
+      if(noSelectionError) setNoSelectionError(false);
+      const parsedData = {
+        title: data.title,
+        DishId: selectedDishes.map(id => parseInt(id))
+      }
+      createNewMenu(parsedData);
+      reset();
+      history.push('/menu_saved');
     }
-    createNewMenu(parsedData);
-    reset();
-    history.push('/menu_saved');
   }
 
   const handleCheckBox = (event) => {
@@ -59,6 +67,7 @@ function MenuForm ({ dishes, createNewMenu, selectedDishes, setSelectedDishes })
           </div>
         )}
       </div>
+      {noSelectionError && <p>Please select at least one dish to create the menu.</p> }
       <input type="submit" className="onSubmit" />
     </form>
   );

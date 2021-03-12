@@ -32,14 +32,15 @@ const useStyles = makeStyles((theme) => ({
 function TopNav () {
   const history = useHistory();
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState<Element | ((element: Element) => Element) | null | undefined>(null);
   const open = Boolean(anchorEl);
 
-  const handleMenu = (event) => {
+  const handleMenu = (event: React.MouseEvent) => {
+    console.log(event);
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMenuClick = (path) => {
+  const handleMenuClick = (path: string) => {
     history.push(path);
     setAnchorEl(null);
   };

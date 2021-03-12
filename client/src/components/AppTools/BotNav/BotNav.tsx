@@ -8,7 +8,7 @@ import ThreeSixtyIcon from '@material-ui/icons/ThreeSixty';
 function BotNav () {
   const pathname = window.location.pathname; // in case user visits the path directly. The BottomNavBar is able to follow suit.
   const [value, setValue] = React.useState(pathname);
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
     setValue(newValue);
   };
   return (
