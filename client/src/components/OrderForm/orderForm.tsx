@@ -10,23 +10,21 @@ interface OrderProps {
   createNewOrder: (body: Order) => void,
   menus: Menu[],
   chosenMenu: [],
-  setChosenMenu: (body: Menu[]) => void
+  setChosenMenu: (body: Menu[]) => void,
 }
 
 const OrderForm: React.FC<OrderProps&RouteComponentProps> = ({ createNewOrder, menus, chosenMenu, setChosenMenu }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const history = useHistory();
 
-  const onSubmit = (data: { clientName: string; clientAddress: string; clientPhone: number; comments: string; }) => {
+  const onSubmit = (data: Order) => {
     const parsedData = {
       clientName: data.clientName,
       clientAddress: data.clientAddress,
       clientPhone: data.clientPhone,
       comments: data.comments,
-      DishId: chosenMenu.map((id) => parseInt(id))
+      DishId: chosenMenu.map((id) => parseInt(id)),
     }
-    console.log('PD', parsedData)
-    console.log('data', data)
     createNewOrder(parsedData);
     setChosenMenu([]);
     reset();
