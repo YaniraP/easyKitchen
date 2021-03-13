@@ -1,6 +1,11 @@
 import './orderItem.css'
+import { Order } from '../../interfaces/order';
 
-function OrderItem ({ order }) {
+interface OrderItemProps {
+  order: Order
+}
+
+const OrderItem: React.FC<OrderItemProps> = ({ order })  => {
 
   return (
     <div className='orderItem'>
@@ -10,7 +15,7 @@ function OrderItem ({ order }) {
       <p>Phone: {order.clientPhone}</p>
       <p>Comments: {order.comments}</p>
 
-      {order.Dishes.map((dish) =>
+      {order.Dishes?.map((dish) =>
         <div key={dish.id}>
           <p >{dish.title}</p>
         </div>
