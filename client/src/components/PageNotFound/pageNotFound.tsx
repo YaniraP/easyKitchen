@@ -1,5 +1,5 @@
 import './pageNotFound.css'
-import icecream from '../../img/ice-cream.png'
+import icecream from '../img/ice-cream.png'
 
 function PageNotFound () {
   return (

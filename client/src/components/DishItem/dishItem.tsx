@@ -1,6 +1,13 @@
 import './dishItem.css'
+import * as React from 'react';
+import { Dish } from 'interfaces/dish';
 
-function DishItem ({ dish }) {
+interface Props{
+  dish: Dish;
+}
+
+
+const DishItem: React.FC<Props> = ({ dish }) => {
   return (
     <div className='dishItem'>
       <h2>{dish.title}</h2>
