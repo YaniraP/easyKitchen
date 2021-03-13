@@ -1,10 +1,13 @@
-import db from '../models/index';
+
+const db = require('../models');
+
+const {Menu, Dish} = db;
 
 //get all menus
 exports.getAll = async (req, res) => {
   try {
-    const menus = await db.Menu.findAll({
-      include: [{ model: db.Dish }],
+    const menus = await Menu.findAll({
+      include: [{ model: Dish }],
     });
     res.status(200);
     res.send(menus);
@@ -18,7 +21,7 @@ exports.getAll = async (req, res) => {
 exports.getOneMenu = async (req, res) => {
   try {
     const { id } = req.params;
-    const menu = await db.Menu.findOne({
+    const menu = await Menu.findOne({
       where: { id: id },
     });
     res.status(200);
@@ -31,15 +34,14 @@ exports.getOneMenu = async (req, res) => {
 
 // create a menu
 exports.createMenu = async (req, res) => {
-  console.log('req.body -> ', req.body.DishId);
+  console.log('req.body -> ', req.body);
   try {
-    const newMenu = await db.Menu.create(req.body);
+    const newMenu = await Menu.create(req.body);
 
-    newMenu.addDish(req.body.DishId);
+    newMenu.addDish(req.body.dishId);
     console.log(newMenu);
     res.status(201);
     res.send(newMenu);
-
   } catch (e) {
     console.log(e); //eslint-disable-line no-console
     res.status(500).send(e);
@@ -50,7 +52,7 @@ exports.createMenu = async (req, res) => {
 exports.deleteMenu = async (req, res) => {
   const title = req.body.title;
   const { id } = req.params;
-  db.Menu.destroy({
+  Menu.destroy({
     where: { title: title },
   })
     .then(() => {

@@ -1,9 +1,9 @@
-import db from '../models/index'
+import { Dish } from '../models'
 
 //get all dishes 
 exports.getAll = async (req, res) => {
   try {
-    const dishes = await db.Dish.findAll();
+    const dishes = await Dish.findAll();
     res.status(200)
     res.send(dishes)
   } catch (e) {
@@ -15,7 +15,7 @@ exports.getAll = async (req, res) => {
 // create a dish 
 exports.addDish = async (req, res) => {
   try {
-    const newDish = await db.Dish.create(req.body);
+    const newDish = await Dish.create(req.body);
     res.status(201);
     res.send(newDish)
   } catch (e) {
@@ -28,7 +28,7 @@ exports.addDish = async (req, res) => {
 exports.deleteDish = async (req, res) => {
   const id = req.params.id;
 
-  db.Dish.destroy({
+  Dish.destroy({
     where: { id: id }
   }).then(() => {
     res.status(204).end();

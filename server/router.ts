@@ -21,7 +21,7 @@ router.get('/menu/:id', menuCtrl.getOneMenu)
 
 //ORDER
 router.get('/order', orderCtrl.getAll)
-//router.post('/order', orderCtrl.createOrder)
+router.post('/order', orderCtrl.createOrder)
 router.delete('/order', orderCtrl.deleteOrder)
 
 

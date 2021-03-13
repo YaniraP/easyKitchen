@@ -1,36 +1,29 @@
-import {  Model, Optional } from 'sequelize';
+import { DataTypes, Model, Sequelize, BuildOptions, BelongsToManyAddAssociationMixin } from 'sequelize';
 
 // Interface
 export interface MenuAttributes {
   id?: number;
   title: string;
-  addDish: (() => any);
+  addDish?: BelongsToManyAddAssociationMixin<MenuModel, any>;
 }
 
+interface MenuModel extends Model<MenuAttributes>, MenuAttributes {
+  //addDish?: BelongsToManyAddAssociationMixin<MenuModel, any>;
+}
 
+type MenuStatic = typeof Model & {
+  new (values?: MenuAttributes, options?: BuildOptions): MenuModel;
+};
 
-// Some attributes are optional in `User.build` and `User.create` calls
-export interface MenuCreationAttributes extends Optional<MenuAttributes, 'id' | 'addDish'> {}
-
-// interface MenuInstance extends Model<MenuAttributes>,
-// MenuAttributes{}
-
-module.exports = (sequelize, DataTypes) => {
-  const Menu: Model<
-    MenuAttributes,
-    MenuCreationAttributes
-  > = sequelize.define(
-    'Menu',
+export function MenuFactory(sequelize: Sequelize): MenuStatic {
+  return <MenuStatic>sequelize.define(
+    'Menus',
     {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-    },
-    {
-      tableName: 'Menus',
-    }
-  );
+    });
+}
 
-  return Menu;
-};
+
