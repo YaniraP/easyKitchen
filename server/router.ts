@@ -1,5 +1,5 @@
-const router = require('express').Router();
-const dishCtrl = require('./controllers/dish.controller');
+export const router = require('express').Router();
+const dishCtrl = require('./controllers/dish.controller')
 const orderCtrl = require('./controllers/order.controller')
 const menuCtrl = require('./controllers/menu.controller')
 
@@ -21,9 +21,7 @@ router.get('/menu/:id', menuCtrl.getOneMenu)
 
 //ORDER
 router.get('/order', orderCtrl.getAll)
-router.post('/order', orderCtrl.createOrder)
+//router.post('/order', orderCtrl.createOrder)
 router.delete('/order', orderCtrl.deleteOrder)
 
 
-
-module.exports = router;

@@ -3,7 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 
 
@@ -49,10 +49,12 @@ function TopNav () {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar style={{ background: '#EEE' }}>
+          <Link to="/get_started">
           <img
             src={"/Logo-easykitchen.png"}
             alt="logo"
             className={classes.logo} />
+          </Link>
           <Typography
             variant="h6"
             className={classes.title}>
