@@ -1,7 +1,7 @@
 import { Dish } from './dish';
 
 export interface Order{
-  Dishes?: Dish[];
+  Dishes?: Dish[] | undefined;
   clientName: string,
   clientAddress: string,
   clientPhone: number,
