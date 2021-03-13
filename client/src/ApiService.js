@@ -73,5 +73,6 @@ export default {
   addDish,
   createMenu,
   createOrder,
-  getMenu
+  getMenu,
+  deleteMenu
 };

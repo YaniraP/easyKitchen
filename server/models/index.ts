@@ -1,66 +1,39 @@
-import {Sequelize, DataTypes} from 'sequelize';
-import * as fs from 'fs';
-import * as path from 'path';
+import { Sequelize } from 'sequelize';
+import { DishFactory } from './dish.model';
+import { MenuFactory } from './menu.model';
+import { OrderFactory } from './order.model';
+require('dotenv').config();
 
-const basename = path.basename(__filename)
+const env = process.env.NODE_ENV || 'development';
 
-interface db {
-  sequelize?: any;
-  Sequelize?: any;
-}
-const db: db = {};
+const config = require(__dirname + '/../config/config.ts')[env];
 
 
-
-  const sequelize = new Sequelize('dbek', process.env.DB_USER, process.env.DB_PASS, {
-    host: 'localhost',
-    dialect: 'postgres',
-    logging: console.log,
+export const db = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  {
+    dialect: config.dialect,
     pool: {
-      max: 5,
       min: 0,
+      max: 5,
       acquire: 30000,
-      idle: 10000
+      idle: 10000,
     },
-    //operatorsAliases: false // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
-  });
-
-
-fs.readdirSync(__dirname)
-  .filter((file) => {
-    return (
-      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.ts'
-    );
-  })
-  .forEach((file) => {
-    const model = require(path.join(__dirname, file))(
-      sequelize,
-      DataTypes
-    );
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
   }
-});
+);
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established succesfully.');
-  })
-  .catch((error) => {
-    console.error('Unable to connect to the database:', error);
-  });
-
-  module.exports = db;
+// Factories
+const Dish = DishFactory(db);
+const Menu = MenuFactory(db);
+const Order = OrderFactory(db);
 
 
 
+// Associations
+Dish.belongsToMany(Menu, { through: 'DishesPerMenu', foreignKey: 'DishId' });
+Menu.belongsToMany(Order, { through: 'DishesPerOrder' });
+Order.belongsToMany(Dish, { through: 'DishesPerOrder' });
 
-
+export { Dish, Order, Menu };

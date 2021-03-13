@@ -1,6 +1,6 @@
-import { ModelDefined, Optional } from 'sequelize';
+import { DataTypes, Model, Sequelize, BuildOptions } from 'sequelize';
 
-// Interface
+// Interfaces
 export interface OrderAttributes {
   id?: number;
   clientName: string;
@@ -9,16 +9,17 @@ export interface OrderAttributes {
   comments: string;
 }
 
-// Some attributes are optional in `User.build` and `User.create` calls
-interface OrderCreationAttributes extends Optional<OrderAttributes, 'id'> {}
+export interface OrderModel extends Model<OrderAttributes> {
+  getDishes: any;
+  setDishes: any;
+}
 
-module.exports = (sequelize, DataTypes) => {
-  const Order: ModelDefined<
-    OrderAttributes,
-    OrderCreationAttributes
-  > = sequelize.define(
-    'Order',
-    {
+type OrderStatic = typeof Model & {
+  new (values?: OrderAttributes, options?: BuildOptions): OrderModel;
+};
+
+export function OrderFactory(sequelize: Sequelize): OrderStatic {
+  return <OrderStatic>sequelize.define('Orders', {
     clientName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,18 +29,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     clientPhone: {
-      type: DataTypes.INTEGER(15)
+      type: DataTypes.INTEGER,
     },
     comments: {
-      type: DataTypes.STRING(500)
-    }
-  },
-    {
-      tableName: 'Order',
-    }
-  );
-
-  //TODO: Add associations
-
-  return Order;
-};
+      type: DataTypes.STRING(500),
+    },
+  });
+}
