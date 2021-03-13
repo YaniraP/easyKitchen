@@ -1,7 +1,4 @@
-import {
-  ModelDefined,
-  Optional,
-} from 'sequelize';
+import { DataTypes, Model, Sequelize, BuildOptions } from 'sequelize';
 
 // Interface
 export interface DishAttributes {
@@ -10,47 +7,30 @@ export interface DishAttributes {
   description: string;
   price: number;
   image: string;
-
-  associate?: any;
 }
 
 // Some attributes are optional in `User.build` and `User.create` calls
-interface DishCreationAttributes extends Optional<DishAttributes, 'id'> {}
+interface DishModel extends Model<DishAttributes>, DishAttributes {}
 
-module.exports = (sequelize, DataTypes) => {
-  const Dish: ModelDefined<
-    DishAttributes,
-    DishCreationAttributes
-  > = sequelize.define(
-    'Dish',
-    {
-      title: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      description: {
-        type: DataTypes.STRING(1024),
-      },
-      price: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-      },
-      image: {
-        type: DataTypes.STRING(1024),
-      },
-    },
-    {
-      tableName: 'Dish'
-    }
-  );
-
-
-  //TODO: Add associations
-// Dish.associate = model => {
-// Dish.belongsToMany(model.Menu, {through: 'DishesPerMenu'});
-// Dish.belongsToMany(model.Order, {through: 'DishesPerOrder'})
-
-return Dish
+type DishStatic = typeof Model & {
+  new (values?: DishAttributes, options?: BuildOptions): DishModel;
 };
 
-
+export function DishFactory(sequelize: Sequelize): DishStatic {
+  return <DishStatic>sequelize.define('Dishes', {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING(1024),
+    },
+    price: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING(1024),
+    },
+  });
+}
