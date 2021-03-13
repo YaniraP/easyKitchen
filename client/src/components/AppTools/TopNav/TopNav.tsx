@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 function TopNav () {
   const history = useHistory();
   const classes = useStyles();
@@ -36,7 +35,6 @@ function TopNav () {
   const open = Boolean(anchorEl);
 
   const handleMenu = (event: React.MouseEvent) => {
-    console.log(event);
     setAnchorEl(event.currentTarget);
   };
 
@@ -46,7 +44,7 @@ function TopNav () {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} role='menubar'>
       <AppBar position="static">
         <Toolbar style={{ background: '#EEE' }}>
           <img
@@ -64,6 +62,7 @@ function TopNav () {
               color="inherit"
               aria-label="menu"
               onClick={handleMenu}
+              role='button'
             >
               <MenuIcon />
             </IconButton>
@@ -82,10 +81,10 @@ function TopNav () {
               open={open}
               onClose={() => setAnchorEl(null)}
             >
-              <MenuItem onClick={() => handleMenuClick('/add_dish')}>Add a dish</MenuItem>
-              <MenuItem onClick={() => handleMenuClick('/create_menu')}>Create a menu</MenuItem>
-              <MenuItem onClick={() => handleMenuClick('/menu')}>See menus</MenuItem>
-              <MenuItem onClick={() => handleMenuClick('/order')}>See orders</MenuItem>
+              <MenuItem role='menuitem' onClick={() => handleMenuClick('/add_dish')}>Add a dish</MenuItem>
+              <MenuItem role='menuitem' onClick={() => handleMenuClick('/create_menu')}>Create a menu</MenuItem>
+              <MenuItem role='menuitem' onClick={() => handleMenuClick('/menu')}>See menus</MenuItem>
+              <MenuItem role='menuitem' onClick={() => handleMenuClick('/order')}>See orders</MenuItem>
             </Menu>
           </div>
         </Toolbar>
