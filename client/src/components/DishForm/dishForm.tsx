@@ -2,15 +2,19 @@ import './dishForm.css';
 import { useForm } from "react-hook-form";
 import { Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
-import { useHistory } from 'react-router';
+import { RouteComponentProps, useHistory } from 'react-router';
+import * as React from 'react';
+import { Dish } from 'interfaces/dish';
 
+interface Props{
+  addNewDish: (dish: Dish) => void
+}
 
-function DishForm ({ addNewDish }) {
-
+const DishForm: React.FC<Props & RouteComponentProps> = ({ addNewDish }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const history = useHistory();
 
-  const onSubmit = data => {
+  const onSubmit = (data: Dish) => {
     addNewDish(data);
     reset();
     history.push('/dish_saved');
@@ -66,7 +70,6 @@ function DishForm ({ addNewDish }) {
       </form>
     </Grid>
   );
-
 }
 
 export default withRouter(DishForm);

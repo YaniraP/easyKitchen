@@ -1,7 +1,13 @@
 
 import MenuItemList from '../MenuItemList/menuItemList'
+import * as React from 'react';
+import { Menu } from 'interfaces/menu'
 
-function MenuList ({ menus }) {
+interface Props{
+  menus: Menu[]
+}
+
+const MenuList: React.FC<Props> = ({ menus }) => {
   return (
     <div className='menuList'>
       {menus.map(menu =>
