@@ -12,11 +12,11 @@ function BotNav () {
     setValue(newValue);
   };
   return (
-    <div className="btn-nav">
+    <div className="btn-nav" role='navigation' aria-label='Bottom-Navbar'>
       <BottomNavigation value={value} onChange={handleChange} showLabels={true} >
-        <BottomNavigationAction label="Home" value="/" icon={<ThreeSixtyIcon />} component={Link} to='/' />
-        <BottomNavigationAction label="Home" value="/" icon={<Home />} component={Link} to='/get_started' />
-        <BottomNavigationAction label="User" value="/create_order" icon={<People />} component={Link} to='/create_order' />
+        <BottomNavigationAction label="Home" value="/" icon={<ThreeSixtyIcon />} component={Link} data-testid='home-button' to='/' />
+        <BottomNavigationAction label="Get-Started" value="/" icon={<Home />} component={Link} data-testid='getstarted-button' to='/get_started' />
+        <BottomNavigationAction label="User" value="/create_order" icon={<People />} component={Link} data-testid='user-button' to='/create_order' />
       </BottomNavigation>
     </div>
   );

@@ -1,7 +1,8 @@
-const BASE_URL = 'http://localhost:3001';
 import { Dish } from 'interfaces/dish';
-import { Menu } from 'interfaces/menu';
+import { NewMenuRequest } from 'interfaces/menu';
 import { Order } from 'interfaces/order';
+
+const BASE_URL = 'http://localhost:3001';
 
 interface FetchOptions {
   method?: string,
@@ -33,7 +34,7 @@ const getMenu = () => {
   return fetchRequest('/menu/:id');
 }
 
-const createMenu = (body: Menu) => {
+const createMenu = (body: NewMenuRequest) => {
   const httpOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -43,14 +44,14 @@ const createMenu = (body: Menu) => {
 }
 
 //TODO IMPLEMENT IT
-const deleteMenu = (id: string) => {
-  const httpOptions = {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(id)
-  };
-  return fetchRequest(`/menu/:${id}`, httpOptions);
-};
+// const deleteMenu = (id: string) => {
+//   const httpOptions = {
+//     method: 'DELETE',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(id)
+//   };
+//   return fetchRequest(`/menu/:${id}`, httpOptions);
+// };
 
 //ORDERS
 const getOrders = () => {
