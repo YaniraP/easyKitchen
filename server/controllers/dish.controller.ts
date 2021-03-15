@@ -1,6 +1,4 @@
-// const db = require('../models/index');
-const { Dish } = require('../models');
-
+import { Dish } from '../models'
 
 //get all dishes 
 exports.getAll = async (req, res) => {
@@ -28,19 +26,21 @@ exports.addDish = async (req, res) => {
 
 // delete a dish 
 exports.deleteDish = async (req, res) => {
-  const title = req.body.title;
+  const id = req.params.id;
 
   Dish.destroy({
-    where: { title: title }
+    where: { id: id }
   }).then(() => {
     res.status(204).end();
   })
     .catch(err => {
       res.status(500).send({
-        message: "Error deletingOrder with name=" + title
+        message: "Error deletingOrder with id=" + id
       });
     });
 }
+
+
 
 
 //TODO: modify a dish (if needed later)

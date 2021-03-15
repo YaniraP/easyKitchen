@@ -1,13 +1,12 @@
-const { CLIEngine } = require('eslint');
-const { Order, Dish } = require('../models');
-
-
+import { Order, Dish} from "../models/index";
 //get all orders 
 exports.getAll = async (req, res) => {
   try {
-    const orders = await Order.findAll({
-      include: [{ model: Dish }]
-    });
+    const orders = await Order.findAll(
+    //   {
+    //   include: [{ model: Dish }]
+    // }
+    );
     res.status(200)
     console.log('orders -> ', orders);
     res.send(orders)
@@ -17,7 +16,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
-// create an order
+// // create an order
 exports.createOrder = async (req, res) => {
   try {
     const newOrder = await Order.create(req.body);
@@ -25,7 +24,7 @@ exports.createOrder = async (req, res) => {
     const dishes = await newOrder.getDishes();
     console.log('dishes -> ', dishes);
     const body = newOrder.toJSON()
-    body.Dishes = dishes.flat().map(dish => dish.toJSON());
+    //body.Dishes = dishes.flat().map(dish => dish.toJSON());
     console.log('createOrderBody', body)
     res.status(201);
     res.send(body)

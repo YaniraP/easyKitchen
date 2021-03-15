@@ -16,6 +16,7 @@ import ClientBye from './components/ClientBye/ClientBye'
 import MenuSaved from './components/MenuSaved/MenuSaved'
 import GetStarted from './components/GetStarted/getStarted'
 import DishSaved from './components/DishSaved/DishSaved'
+import PageNotFound from './components/PageNotFound/pageNotFound'
 
 function App () {
   const [dishes, setDishes] = useState([]);
@@ -133,6 +134,7 @@ function App () {
               <Route exact path="/dish_saved" component={DishSaved} />
               <Route exact path="/menu_saved" component={MenuSaved} />
               <Route exact path="/bye" component={ClientBye} />
+              <Route component={PageNotFound} />
             </Switch>
           </div>
           <BotNav value={tab} onChange={setTab} />
