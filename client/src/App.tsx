@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ApiService from './ApiService';
+import { Dish } from 'interfaces/dish';
+import { Menu, NewMenuRequest } from 'interfaces/menu';
+import { Order } from 'interfaces/order';
 import DishList from './components/DishList/dishList';
 import MenuList from './components/MenuList/menuList';
 import OrderList from './components/OrderList/orderList';
 import DishForm from './components/DishForm/dishForm';
 import MenuForm from './components/MenuForm/menuForm';
 import OrderForm from './components/OrderForm/orderForm';
-import MenuItemById from './components/MenuItemById/menuItemById';
 import Home from './components/Home/Home';
 import { CssBaseline, Grid } from '@material-ui/core';
 import TopNav from './components/AppTools/TopNav/TopNav';
@@ -17,16 +19,13 @@ import ClientBye from './components/ClientBye/ClientBye'
 import MenuSaved from './components/MenuSaved/MenuSaved'
 import GetStarted from './components/GetStarted/getStarted'
 import DishSaved from './components/DishSaved/DishSaved'
-import PageNotFound from './components/PageNotFound/pageNotFound'
 
 function App () {
-  const [dishes, setDishes] = useState([]);
-  const [menus, setMenus] = useState([]);
-  const [orders, setOrders] = useState([]);
-  const [selectedDishes, setSelectedDishes] = useState([]);
-  const [chosenMenu, setChosenMenu] = useState([]);
-  const [tab, setTab] = useState(0);
-
+  const [dishes, setDishes] = useState<Dish[]>([]);
+  const [menus, setMenus] = useState<Menu[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [selectedDishes, setSelectedDishes] = useState<Dish[]>([]);
+  const [chosenMenu, setChosenMenu] = useState<string[]>([]); // chosenmenu is an array of dish ids
 
   //DISHES
   useEffect(() => {
@@ -34,7 +33,7 @@ function App () {
       .then((data) => setDishes(data))
   }, []);
 
-  const addNewDish = (body) => {
+  const addNewDish = (body: Dish) => {
     ApiService.addDish(body)
       .then((dish) => setDishes(prevDishes => [...prevDishes, dish]))
   };
@@ -45,17 +44,14 @@ function App () {
       .then((data) => setMenus(data))
   }, []);
 
-  const createNewMenu = (body) => {
+  const createNewMenu = (body: NewMenuRequest) => {
+    const dishesById = body.DishId.map((dishId) => dishes.find(dish => dish.id === dishId));
     ApiService.createMenu(body)
-      .then((menu) => setMenus(prevMenus => [...prevMenus, menu]))
+      .then((menu) => {
+        Object.assign(menu, {Dishes: dishesById})
+        setMenus(prevMenus => [...prevMenus, menu])
+      })
   };
-
-
-  const deleteOneMenu = (id) => {
-    ApiService.deleteMenu(id)
-      .then(setMenus(menus.filter((menu) => menu.id !== id)))
-  };
-
 
   //ORDERS
   useEffect(() => {
@@ -63,7 +59,7 @@ function App () {
       .then((data) => setOrders(data))
   }, []);
 
-  const createNewOrder = (body) => {
+  const createNewOrder = (body: Order) => {
     ApiService.createOrder(body)
       .then((order) => setOrders(prevOrders => {
         console.log('orders -> ', [...prevOrders, order]);
@@ -76,7 +72,7 @@ function App () {
   const containerStyle = {
     height: "calc(100vh - 112px)",
     overFlow: "auto",
-    textAlign: "center",
+    TextAlign: "center",
 
   }
 
@@ -107,27 +103,19 @@ function App () {
                   createNewMenu={createNewMenu}
                   selectedDishes={selectedDishes}
                   setSelectedDishes={setSelectedDishes}
-                  menus={menus}
                 />
               </Route>
               <Route exact path="/order">
                 <OrderList
-                  orders={orders}
-                  chosenMenu={chosenMenu}
+                  order={orders}
                 />
               </Route>
               <Route exact path="/create_order">
                 <OrderForm
                   createNewOrder={createNewOrder}
                   menus={menus}
-                  dishes={dishes}
                   chosenMenu={chosenMenu}
                   setChosenMenu={setChosenMenu}
-                />
-              </Route>
-              <Route exact path="/menu/:id">
-                <MenuItemById
-                  menus={menus}
                 />
               </Route>
               <Route exact path="/get_started" component={GetStarted} />
@@ -135,10 +123,9 @@ function App () {
               <Route exact path="/dish_saved" component={DishSaved} />
               <Route exact path="/menu_saved" component={MenuSaved} />
               <Route exact path="/bye" component={ClientBye} />
-              <Route component={PageNotFound} />
             </Switch>
           </div>
-          <BotNav value={tab} onChange={setTab} />
+          <BotNav/>
         </Grid>
         <CssBaseline />
       </div>

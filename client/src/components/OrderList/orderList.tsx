@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { Order } from '../../interfaces/order';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -36,8 +37,12 @@ const useStyles = makeStyles({
   },
 });
 
+interface OrderListProps {
+  order: Order[]
+}
 
-function OrderList ({ orders }) {
+
+const OrderList: React.FC<OrderListProps> = ({ order })  => {
   const classes = useStyles();
 
   return (
@@ -55,7 +60,7 @@ function OrderList ({ orders }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {orders.map((order) => (
+            {order?.map((order) => (
               <StyledTableRow key={order.id}>
                 <StyledTableCell component="th" scope="row">
                   {order.id}
@@ -64,7 +69,7 @@ function OrderList ({ orders }) {
                 <StyledTableCell align="right">{order.clientAddress}</StyledTableCell>
                 <StyledTableCell align="right">{order.clientPhone}</StyledTableCell>
                 <StyledTableCell align="right">{order.comments}</StyledTableCell>
-                <StyledTableCell align="right">{order.Dishes?.map(dish => `| ${dish?.title} |`)}</StyledTableCell>
+                <StyledTableCell align="right">{order.Dishes?.map((dish: { title: string; }) => `| ${dish?.title} |`)}</StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

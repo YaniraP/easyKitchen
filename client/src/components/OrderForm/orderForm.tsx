@@ -1,24 +1,30 @@
 import './orderForm.css';
 import { useForm } from "react-hook-form";
 import { withRouter } from 'react-router-dom';
-import { useHistory } from 'react-router';
+import { RouteComponentProps, useHistory } from 'react-router';
+import { Order } from '../../interfaces/order';
+import { Menu } from '../../interfaces/menu';
+import React from 'react';
 
+interface OrderProps {
+  createNewOrder: (body: Order) => void,
+  menus: Menu[],
+  chosenMenu: string[], // chosenMenu is an array of dish Ids
+  setChosenMenu: (body: string[]) => void,
+}
 
-function OrderForm ({ createNewOrder, menus, chosenMenu, setChosenMenu }) {
+const OrderForm: React.FC<OrderProps&RouteComponentProps> = ({ createNewOrder, menus, chosenMenu, setChosenMenu }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const history = useHistory();
 
-  const onSubmit = data => {
+  const onSubmit = (data: Order) => {
     const parsedData = {
       clientName: data.clientName,
       clientAddress: data.clientAddress,
       clientPhone: data.clientPhone,
       comments: data.comments,
-      DishId: chosenMenu.map(id => parseInt(id))
-
+      DishId: chosenMenu.map((id) => parseInt(id)),
     }
-    console.log('PD', parsedData)
-    console.log('data', data)
     createNewOrder(parsedData);
     setChosenMenu([]);
     reset();
@@ -26,14 +32,12 @@ function OrderForm ({ createNewOrder, menus, chosenMenu, setChosenMenu }) {
   }
 
 
-  const handleCheckBox = (event) => {
+  const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     if (event.target.checked) {
       setChosenMenu([...chosenMenu, event.target.value])
-      console.log('cM', typeof chosenMenu[0])
     } else {
-      setChosenMenu(chosenMenu.filter(dish => dish !== event.target.value))
-
+      setChosenMenu(chosenMenu.filter((dish) => dish !== event.target.value))
     }
   }
 
