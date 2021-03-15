@@ -9,8 +9,8 @@ import React from 'react';
 interface OrderProps {
   createNewOrder: (body: Order) => void,
   menus: Menu[],
-  chosenMenu: [],
-  setChosenMenu: (body: Menu[]) => void,
+  chosenMenu: string[], // chosenMenu is an array of dish Ids
+  setChosenMenu: (body: string[]) => void,
 }
 
 const OrderForm: React.FC<OrderProps&RouteComponentProps> = ({ createNewOrder, menus, chosenMenu, setChosenMenu }) => {
@@ -35,8 +35,7 @@ const OrderForm: React.FC<OrderProps&RouteComponentProps> = ({ createNewOrder, m
   const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     if (event.target.checked) {
-      const targetMenu = menus.filter((menu) => menu.id === parseInt(event.target.value))[0];
-      setChosenMenu([...chosenMenu, targetMenu])
+      setChosenMenu([...chosenMenu, event.target.value])
     } else {
       setChosenMenu(chosenMenu.filter((dish) => dish !== event.target.value))
     }
