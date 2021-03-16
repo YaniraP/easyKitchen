@@ -1,19 +1,21 @@
-let request = require('supertest');
-request = request('http://localhost:3001');
+require('dotenv').config();
+const supertest = require('supertest');
+const { runServer } = require('../server');
 const { Dish, sequelize } = require('../models');
-const { mockDishes, mockNewDish } = require('./mocks');
+const { mockDishes, mockNewDish } = require('../__mocks__/dish.mocks');
 
-// TODO: CHECK & RUN ONLY IF IN TEST ENV
+let request;
+
+beforeAll(async () => {
+  const app = await runServer(process.env.TEST_PORT);
+  request = supertest(app);
+})
 
 describe('GET requests for dishes', () => {
   beforeAll(async () => {
     await Dish.destroy({where: {}});
     await Dish.bulkCreate(mockDishes);
   });
-
-  // afterAll(async () => {
-  //   await sequelize.close();
-  // })
 
   // GET
   it('should send status code 200 for GET request', async done => {

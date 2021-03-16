@@ -1,4 +1,3 @@
-
 const loadConfig = {
   development: {
     database: process.env.DB_NAME,
