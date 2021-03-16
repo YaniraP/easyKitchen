@@ -1,17 +1,17 @@
 import { render, screen } from '@testing-library/react';
 // eslint-disable-next-line jest/no-mocks-import
-import { _mockOrder } from '__mocks__/order/orders';
+import { _mockOrder1 } from '__mocks__/order/orders';
 import { MemoryRouter } from "react-router-dom";
 import '@testing-library/jest-dom';
 import OrderItem from './orderItem';
 
-const {id, clientName, clientAddress, clientPhone, comments} = _mockOrder
+const { id, clientName, clientAddress, clientPhone, comments } = _mockOrder1
 
 describe('should render order single passed down order details', () => {
   beforeEach(() => {
     render(
       <MemoryRouter>
-        <OrderItem order={_mockOrder} />
+        <OrderItem order={_mockOrder1} />
       </MemoryRouter>
     );
   });
