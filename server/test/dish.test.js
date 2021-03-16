@@ -1,7 +1,9 @@
 let request = require('supertest');
-const { Dish, sequelize } = require('../models');
-const { mockDishes } = require('./mocks');
 request = request('http://localhost:3001');
+const { Dish, sequelize } = require('../models');
+const { mockDishes, mockNewDish } = require('./mocks');
+
+// TODO: CHECK & RUN ONLY IF IN TEST ENV
 
 describe('GET requests for dishes', () => {
   beforeAll(async () => {
@@ -9,9 +11,9 @@ describe('GET requests for dishes', () => {
     await Dish.bulkCreate(mockDishes);
   });
 
-  afterAll(() => {
-    sequelize.close();
-  })
+  // afterAll(async () => {
+  //   await sequelize.close();
+  // })
 
   // GET
   it('should send status code 200 for GET request', async done => {
@@ -36,5 +38,50 @@ describe('GET requests for dishes', () => {
 })
 
 // POST
+describe('POST requests for dishes', () => {
+  beforeEach(async () => {
+    await Dish.destroy({where: {title: 'New Mock Pizza'}});
+  });
+
+  it('should send status code 201 for POST request', async done => {
+    const response = await request.post('/dish').send(mockNewDish);
+    expect(response.status).toBe(201);
+    done();
+  });
+
+  it('should reply with the new dish in body', async done => {
+    const response = await request.post('/dish').send(mockNewDish);
+    let replyDish = response.body;
+
+    expect(replyDish.title).toBe('New Mock Pizza');
+    expect(replyDish.description).toBe('just because it starts with new');
+    expect(replyDish.price).toBe('12.00');
+    done();
+  });
+});
 
 // DELETE
+describe('DELETE requests for dishes', () => {
+  beforeAll(async () => {
+    await Dish.destroy({where: {}});
+    await Dish.bulkCreate(mockDishes);
+  });
+
+  afterAll(async () => {
+    await sequelize.close();
+  })
+
+  it('should reply with status code 204', async () => {
+    const response = await request.delete('/dish').send({title: mockDishes[0].title});
+    expect(response.status).toBe(204);
+  })
+
+  it('should delete the dish from database', async () => {
+    const dishes = await Dish.findAll();
+
+    expect(dishes).toHaveLength(1);
+    expect(dishes[0].title).toBe('Test Bowl');
+    expect(dishes[0].description).toBe('A healthy alternative to testing in production');
+    expect(dishes[0].price).toBe('9.00');
+  });
+});

@@ -11,3 +11,9 @@ exports.mockDishes = [
   }
 ];
 
+exports.mockNewDish = {
+  title: 'New Mock Pizza',
+  description: 'just because it starts with new',
+  price: 12
+}
+
