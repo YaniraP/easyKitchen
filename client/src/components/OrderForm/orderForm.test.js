@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 // eslint-disable-next-line jest/no-mocks-import
-import { _mockMenus, _chosenMenus, _mockAdd } from '__mocks__/order/menus';
+import { _mockMenus, _chosenMenus, _mockAdd } from '__mocks__/menu/menus';
 import { MemoryRouter } from "react-router-dom";
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
