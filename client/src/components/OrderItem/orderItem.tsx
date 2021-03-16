@@ -9,11 +9,11 @@ const OrderItem: React.FC<OrderItemProps> = ({ order })  => {
 
   return (
     <div className='orderItem'>
-      <p>Order ID: {order.id}</p>
-      <p>Name: {order.clientName}</p>
-      <p>Address:  {order.clientAddress}</p>
-      <p>Phone: {order.clientPhone}</p>
-      <p>Comments: {order.comments}</p>
+      <p data-testid="order-id">Order ID: {order.id}</p>
+      <p data-testid="order-name">Name: {order.clientName}</p>
+      <p data-testid="order-address">Address:  {order.clientAddress}</p>
+      <p data-testid="order-phone">Phone: {order.clientPhone}</p>
+      <p data-testid="order-comments">Comments: {order.comments}</p>
 
       {order.Dishes?.map((dish) =>
         <div key={dish.id}>
