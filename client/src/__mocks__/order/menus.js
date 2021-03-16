@@ -8,7 +8,9 @@ const mockMenus = JSON.parse(
 
 export const _mockMenus = mockMenus
 
-export const mockAdd = jest.fn();
+export const _chosenMenus = ['1', '2'];
+
+export const _mockAdd = jest.fn();
 
 const mock = {
   menus: jest.fn(() => {
