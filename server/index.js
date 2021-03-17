@@ -15,8 +15,10 @@ app.use(express.json());
 app.use(router);
 
 db.sequelize.sync().then(() => {
-  console.log('db connected');
+  // console.log('db connected');
   app.listen(PORT, () => {
-    console.log(`Server started on http://localhost:${PORT} 🚀`);
+    // console.log(`Server started on http://localhost:${PORT} 🚀`);
   });
 });
+
+module.exports = app
