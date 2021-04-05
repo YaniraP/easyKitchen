@@ -5,7 +5,7 @@ EasyKitchen is a web App that allows amateur cooks to offer delivery service. Cu
 
 
 
-<img align="center" height="200" src="https://user-images.githubusercontent.com/YaniraP/easyKitchen/client/src/img/letsCook.png">
+<img align="center" height="200" src="https://raw.github.com/YaniraP/easyKitchen/client/src/img/letsCook.png">
 
 
 
