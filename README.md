@@ -9,6 +9,10 @@
 
 easyKitchen is an application that allows amateur chefs to offer delivery service. The application has two views, one in which chefs can create daily menus as well as track orders, and the other where clients can view the offers and create orders.
 
+<p align="center">
+ <img align="center" height="280" src="./client/src/img/ImageReadme.png">
+</p>
+
 
 # Tech Stack
 
