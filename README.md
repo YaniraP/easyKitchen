@@ -13,6 +13,19 @@ EasyKitchen is a web App that allows amateur cooks to offer delivery service. Cu
 
 
 # Tech Stack
+
+This project was built using React.js and CSS on the frontend and Node.js, Express.js, Sequelize and PostgresQL on the backend.
+
 <p align="center">
  <img align="center" height="280" src="./client/src/img/Technologies.png">
 </p>
+
+
+# Running easyKitchen
+<ul>
+ <li>Fork & clone the repo</li>
+  <li>Make sure you have postgreSQL installed on your machine</li>
+  <li>Run npm i in both, server & client directory</li>
+  <li>Run npm start in both, server and client directory</li>
+  <li>Start exploring!</li>
+  </ul>
