@@ -25,7 +25,8 @@ This project was built using React.js and CSS on the frontend and Node.js, Expre
 <ul>
  <li>Fork & clone the repo</li>
   <li>Make sure you have postgreSQL installed on your machine</li>
-  <li>Run npm i in both, server & client directory</li>
-  <li>Run npm start in both, server and client directory</li>
+  <li>Run npm i</li>
+  <li>Run nodeon in server directory</li>
+   <li>Run npm start in client directory</li>
   <li>Start exploring!</li>
   </ul>
