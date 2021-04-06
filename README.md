@@ -9,17 +9,6 @@
 
 easyKitchen is an application that allows amateur chefs to offer delivery service. The application has two views, one in which chefs can create daily menus as well as track orders, and the other where clients can view the offers and create orders.
 
-<p align="center">
- <img align="center" height="280" src="./client/src/img/ImageReadme.png"><ul>
- <li>Fork & clone the repo</li>
-  <li>Make sure you have postgreSQL installed on your machine</li>
-  <li>Run npm i</li>
-  <li>Run nodeon in server directory</li>
-   <li>Run npm start in client directory</li>
-  <li>Start exploring!</li>
-  </ul>
-</p>
-
 
 # Tech Stack
 
@@ -67,4 +56,5 @@ npm install
 6. Run your react app
 ```
 npm start
+
 
