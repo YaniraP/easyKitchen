@@ -1,11 +1,11 @@
 
 
 <p align="center">
- <img align="center" height="80" src="./client/src/img/Logo-easykitchen.png">
+ <img align="center" height="60" src="./client/src/img/Logo-easykitchen.png">
 </p>
 
 
-# About
+## About
 
 easyKitchen is an application that allows amateur chefs to offer delivery service. The application has two views, one in which chefs can create daily menus as well as track orders, and the other where clients can view the offers and create orders.
 
@@ -14,7 +14,7 @@ easyKitchen is an application that allows amateur chefs to offer delivery servic
 </p>
 
 
-# Tech Stack
+## Tech Stack
 
 This project was built using [React.js](https://reactjs.org/) on the frontend and [Node.js](https://nodejs.org), [Express](http://expressjs.com/), [Sequelize](https://sequelize.org/) and [PostgreSQL](https://www.postgresql.org/) on the backend.
 
@@ -23,7 +23,7 @@ This project was built using [React.js](https://reactjs.org/) on the frontend an
 </p>
 
 
-# Running easyKitchen
+## Running easyKitchen
 1. Clone the repo
 ```
 git clone <link>
