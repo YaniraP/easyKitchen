@@ -19,7 +19,7 @@ easyKitchen is an application that allows amateur chefs to offer delivery servic
 This project was built using [React.js](https://reactjs.org/) on the frontend and [Node.js](https://nodejs.org), [Express](http://expressjs.com/), [Sequelize](https://sequelize.org/) and [PostgreSQL](https://www.postgresql.org/) on the backend.
 
 <p align="center">
- <img align="center" height="280" src="./client/src/img/Technologies.png">
+ <img align="center" height="280" src="./client/src/img/Technologies__.png">
 </p>
 
 
