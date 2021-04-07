@@ -7,7 +7,7 @@ function ClientBye () {
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
 </style>
-      Enjoy your Meal!
+      Enjoy your meal!
     </div>
   )
 }

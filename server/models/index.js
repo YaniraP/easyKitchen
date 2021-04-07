@@ -1,20 +1,27 @@
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
+require('dotenv').config();
 const db = {};
 
-const sequelize = new Sequelize('dbEK', 'postgres', 'admin', {
-  host: 'localhost',
+const env = process.env.NODE_ENV;
+
+const setup = require(__dirname + '/../config/config.js')[env]
+
+
+const sequelize = new Sequelize(setup.database, setup.username, setup.password, {
+  host:  setup.host,
   dialect: 'postgres',
-  logging: console.log,
+  logging: false,
   pool: {
     max: 5,
     min: 0,
     acquire: 30000,
-    idle: 10000
+    idle: 10000,
   },
-  operatorsAliases: false // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+  operatorsAliases: false, // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
 });
 
 
