@@ -1,21 +1,19 @@
-.container-dishSaved{
-background-image: url("/home/yanira/CodeworksSenior/soloProject/happyKitchen/client/src/img/dish.png");
-height: 70vh; 
+.container-dishSaved {
+  background-image: url('/home/yanira/CodeworksSenior/soloProject/easyKitchen/client/src/img/dish.png');
+  height: 70vh;
 
-padding-top: 4%;
-background-repeat:no-repeat;
-overflow-y: hidden;
-margin: 200px;
- }
-
+  padding-top: 4%;
+  background-repeat: no-repeat;
+  overflow-y: hidden;
+  margin: 200px;
+}
 
 h2 {
   font-family: 'Noto Sans JP', sans-serif;
- }
+}
 
 .text-menu {
-   position: fixed;
-   top: 380px;
-   left: 900px;
-
- } 
+  position: fixed;
+  top: 380px;
+  left: 900px;
+}

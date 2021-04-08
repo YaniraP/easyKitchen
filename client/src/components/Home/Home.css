@@ -1,7 +1,7 @@
 .container-home {
-background-image: url("/home/yanira/CodeworksSenior/soloProject/happyKitchen/client/src/img/background-easykitchen-1.jpg");
-height: calc(100vh - 112px); 
-font-family: 'Noto Sans JP', sans-serif;
-font-size: 100px;
-padding-top: 3%;
- }
+  background-image: url('/home/yanira/CodeworksSenior/soloProject/easyKitchen/client/src/img/background-easykitchen-1.jpg');
+  height: calc(100vh - 112px);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 100px;
+  padding-top: 3%;
+}
