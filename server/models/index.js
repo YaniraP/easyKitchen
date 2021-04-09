@@ -21,7 +21,13 @@ const sequelize = new Sequelize(setup.database, setup.username, setup.password, 
     acquire: 30000,
     idle: 10000,
   },
-  operatorsAliases: false, // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators
+  operatorsAliases: false, // http://docs.sequelizejs.com/manual/tutorial/querying.html#operators,
+  dialectOptions: {
+    ssl: {
+        require: true,
+        rejectUnauthorized: false
+    }
+}
 });
 
 
