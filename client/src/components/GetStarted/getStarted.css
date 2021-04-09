@@ -1,5 +1,5 @@
 .container-home {
-  background-image: url('/background-easykitchen-1.jpg'));
+  background-image: url('/background-easykitchen-1.jpg');
   height: calc(100vh - 112px);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 100px;
