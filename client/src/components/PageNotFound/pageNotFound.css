@@ -1,0 +1,15 @@
+.container-404 {
+  background-color: rgb(255, 244, 187);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pic {
+  height: 700px;
+}
+
+.text {
+  color: pink;
+}
