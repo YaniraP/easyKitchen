@@ -48,7 +48,7 @@ DB_TEST=**db name for test environment as an example**
 TEST_PORT=**db port for test environment as an example**
   ```
 4. You can run your server using nodemon to watch for changes
-   *Note: before running the server, verify that the database is active*
+   * ☝️ Note: before running the server, verify that the database is active*
 ```
 nodemon
 ```
